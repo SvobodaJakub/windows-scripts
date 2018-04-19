@@ -1,0 +1,17 @@
+
+REM review the list and adjust according to your system
+
+icacls "C:\ProgramData" /remove sandbox
+icacls "C:\eclipse" /remove sandbox
+icacls "C:\eSupport" /remove sandbox
+icacls "C:\Intel" /remove sandbox
+icacls "C:\Recovery" /remove sandbox
+icacls "C:\Program Files (x86)\Steam" /remove sandbox
+icacls "C:\." /remove sandbox
+
+net user /delete sandbox /Y
+
+
+
+
+

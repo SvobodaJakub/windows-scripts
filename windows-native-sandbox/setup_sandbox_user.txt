@@ -1,0 +1,23 @@
+
+REM review the list and adjust according to your system
+
+REM this creates a "sandbox" user that is a guest account, not a regular account
+
+net user /add sandbox sandboxpwdPLEASECHANGEME /Y
+net localgroup guests sandbox /add
+net localgroup users sandbox /delete
+
+
+REM this additionally prohibits the "sandbox" account from modifying the following directories
+
+icacls "C:\ProgramData" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\eclipse" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\eSupport" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\Intel" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\Recovery" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\Program Files (x86)\Steam" /deny sandbox:(DE,WDAC,WO,GW,WD,AD,WEA,DC,WA)
+icacls "C:\." /deny sandbox:(NP)(AD,WD)
+
+
+
+

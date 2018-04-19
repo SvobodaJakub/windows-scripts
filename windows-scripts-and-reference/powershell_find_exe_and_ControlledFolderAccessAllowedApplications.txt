@@ -1,0 +1,26 @@
+
+# https://stackoverflow.com/questions/762816/get-powershell-to-display-all-paths-where-a-certain-file-can-be-found-on-a-drive?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+# to find out which property I want:
+# Get-ChildItem | Get-Member
+# https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-exploit-guard/customize-controlled-folders-exploit-guard
+
+
+# find out what exe files are in current directory recursively
+Get-ChildItem -Path . -Recurse *.exe  | Select-Object -Property FullName 
+
+# add all exe in the current directory to exceptions recursively
+Get-ChildItem -Path . -Recurse *.exe  | Select-Object -Property FullName | Foreach-Object { echo $_.FullName ; Add-MpPreference -ControlledFolderAccessAllowedApplications $_.FullName }
+
+
+
+# run these from time to time to bring the exception list up to date as apps are installed and updated
+
+Get-ChildItem -Path "C:\Program Files" -Recurse *.exe  | Select-Object -Property FullName | Foreach-Object { echo $_.FullName ; Add-MpPreference -ControlledFolderAccessAllowedApplications $_.FullName }
+
+Get-ChildItem -Path "C:\Program Files (x86)" -Recurse *.exe  | Select-Object -Property FullName | Foreach-Object { echo $_.FullName ; Add-MpPreference -ControlledFolderAccessAllowedApplications $_.FullName }
+
+# note - change username as necessary, add paths as necessary, etc.
+# this is for my personal reference
+Get-ChildItem -Path "C:\Users\USER\AppData\Local\Programs\Python" -Recurse *.exe  | Select-Object -Property FullName | Foreach-Object { echo $_.FullName ; Add-MpPreference -ControlledFolderAccessAllowedApplications $_.FullName }
+
+
